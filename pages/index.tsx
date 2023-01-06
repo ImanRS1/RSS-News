@@ -1,10 +1,10 @@
+import { useState, useEffect } from "react";
+import { Inter } from "@next/font/google";
+
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "@next/font/google";
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
-import { useState, useEffect } from "react";
-import { log } from "console";
 import axios from "axios";
 
 const MainWrapper = styled.div`
@@ -12,31 +12,47 @@ const MainWrapper = styled.div`
   margin: 0 auto;
 `;
 
-const fetchInitData = async () => {
+const fetchRssData = async (urlArray: string[]) => {
   const fetchedData = await (
     await axios.get("http://localhost:3001/api/getRssData")
   ).data.name;
+
+  const tempo = await axios.post("http://localhost:3001/api/getRssData", {
+    urlArray,
+  });
 
   return fetchedData;
 };
 
 export default function Home() {
-  const [initData, setInitData] = useState<string>();
+  const [rssData, setRssData] = useState<string>();
+
+  const urlArray: string[] = [
+    "http://expressen.se/rss/debatt",
+    "http://gt.se/rss/nyheter",
+    "http://gt.se/rss/nyheter",
+    "https://feeds.expressen.se/kvallsposten",
+    "http://expressen.se/rss/halsa",
+    "http://expressen.se/rss/kultur",
+    "http://expressen.se/rss/ledare",
+    "http://expressen.se/rss/motor",
+    "http://expressen.se/rss/noje",
+    "http://expressen.se/rss/res",
+    "http://expressen.se/rss/sport",
+  ];
 
   useEffect(() => {
     async function fetchData() {
-      const initData = await fetchInitData();
-      setInitData(initData);
+      const rssData = await fetchRssData(urlArray);
+      setRssData(rssData);
     }
     fetchData();
   }, []);
 
-  console.log("index");
-
   return (
     <MainWrapper>
       <NavBar />
-      {initData ? <h1>{initData}</h1> : ""}
+      {rssData ? <h1>{rssData}</h1> : ""}
     </MainWrapper>
   );
 }
