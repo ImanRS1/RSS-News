@@ -8,7 +8,7 @@ export default function handler(
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  console.log("body på backend: ", req.body.lCusno);
+  console.log("body på backend: ");
 
   res.status(200).send({ name: "hej från backend" });
 }

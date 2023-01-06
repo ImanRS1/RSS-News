@@ -5,6 +5,7 @@ import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import { useState, useEffect } from "react";
 import { log } from "console";
+import axios from "axios";
 
 const MainWrapper = styled.div`
   max-width: 1440px;
@@ -12,18 +13,11 @@ const MainWrapper = styled.div`
 `;
 
 const fetchInitData = async () => {
-  const res = await fetch("http://localhost:3002/api/getRssData", {
-    method: "POST",
-    headers: {
-      ["x-siteid"]: "DI",
-      ["content-type"]: "application/json",
-    },
-    body: JSON.stringify({ lCusno: 4407715 }),
-  });
-  const data = await res.json();
-  console.log("hämtad data: ", data.name);
+  const fetchedData = await (
+    await axios.get("http://localhost:3001/api/getRssData")
+  ).data.name;
 
-  return data.name;
+  return fetchedData;
 };
 
 export default function Home() {
