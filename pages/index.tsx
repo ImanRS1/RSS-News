@@ -21,11 +21,22 @@ const fetchRssData = async (urlArray: string[]) => {
     urlArray,
   });
 
-  return JSON.stringify(fetchedData);
+  return fetchedData;
 };
 
+interface rssData {
+  status: string;
+  value: {
+    items: [
+      {
+        title: string;
+      }
+    ];
+  };
+}
+
 export default function Home() {
-  const [rssData, setRssData] = useState<string>();
+  const [rssData, setRssData] = useState<[rssData]>();
 
   const urlArray: string[] = [
     "http://expressen.se/rss/debatt",
@@ -44,7 +55,9 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const rssData = await fetchRssData(urlArray);
-      setRssData(rssData);
+      console.log(rssData.data);
+
+      setRssData(rssData.data);
     }
     fetchData();
   }, []);
@@ -52,7 +65,7 @@ export default function Home() {
   return (
     <MainWrapper>
       <NavBar />
-      {rssData ? <h1>{rssData}</h1> : ""}
+      {rssData ? rssData.map((data) => <p>{data.value.items[0].title}</p>) : ""}
     </MainWrapper>
   );
 }

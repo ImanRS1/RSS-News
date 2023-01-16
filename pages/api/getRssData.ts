@@ -1,10 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import RSSParser from "../../utils/RSSParser";
 
-type Data = {
-  status: string;
-  value: object;
-};
+// type Data = {
+//   status: string;
+//   value: object;
+// };
 
 // value: {
 //   items: Array<Object>;
@@ -18,7 +18,7 @@ type Data = {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse<object>
 ) {
   const urlArray: string[] = await req.body.urlArray;
 
