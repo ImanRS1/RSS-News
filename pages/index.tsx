@@ -13,15 +13,15 @@ const MainWrapper = styled.div`
 `;
 
 const fetchRssData = async (urlArray: string[]) => {
-  const fetchedData = await (
-    await axios.get("http://localhost:3001/api/getRssData")
-  ).data.name;
+  // const fetchedData = await (
+  //   await axios.get("http://localhost:3001/api/getRssData")
+  // ).data.name;
 
-  const tempo = await axios.post("http://localhost:3001/api/getRssData", {
+  const fetchedData = await axios.post("http://localhost:3001/api/getRssData", {
     urlArray,
   });
 
-  return fetchedData;
+  return JSON.stringify(fetchedData);
 };
 
 export default function Home() {
