@@ -65,10 +65,7 @@ export default function Home() {
   return (
     <MainWrapper>
       <NavBar />
-      {/* {rssData ? 
-        rssData.map((data) => <p>{data.value.items[0].title}</p>) 
-        
-        : ""} */}
+      {rssData ? rssData.map((data) => <p key={data.id}>{data.title}</p>) : ""}
     </MainWrapper>
   );
 }

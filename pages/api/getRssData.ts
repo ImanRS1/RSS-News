@@ -24,43 +24,13 @@ export default async function handler(
   res: NextApiResponse<object>
 ) {
   const urlArray: string[] = await req.body.urlArray;
+  const feed = await Promise.all(urlArray.map((url) => FeedHandler(url)));
+  const resultArray = feed.reduce((a, b) => a.concat(b), []);
 
-  Promise.all(
-    urlArray.map(async (url) => {
-      const feed = await RSSParser(url);
-      // console.log("1. feed: ", feed);
-
-      const dateLinkIdTitle = FilterObjectsList(feed);
-      console.log("2. dateLinkIdTitle: ", dateLinkIdTitle.length);
-
-      const tempo = DateSorter(dateLinkIdTitle);
-      //console.log("tempo: ", tempo.length);
-
-      return DateSorter(dateLinkIdTitle);
-    })
-  ).then((responseArr) => {
-    return res.status(200).send(responseArr);
-    // const responses = responseArr.map((res) => {
-    //   console.log(res);
-
-    // const dPublDate = /<dPublDate>(.*?)<\/dPublDate>/g.exec(
-    //   res.value[3]
-    // )[1];
-
-    // return {
-    //   status: res.value[0].CreateDeliveryReclaim_CIIResult,
-    //   dPublDate: dPublDate,
-    // };
-    // });
-
-    //return res.status(200).send(responses);
+  const uniqueObjects = {};
+  resultArray.forEach((obj) => {
+    uniqueObjects[obj.id] = obj;
   });
 
-  //res.status(200).send({ name: "hej från backend" });
+  return res.status(200).send(DateSorter(Object.values(uniqueObjects)));
 }
-
-// export default async function FeedHandler(url: string) {
-//   const feed = await RSSParser(url);
-//   const dateLinkIdTitle = FilterObjectsList(feed);
-//   return DateSorter(dateLinkIdTitle);
-// }
