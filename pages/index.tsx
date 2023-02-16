@@ -1,8 +1,5 @@
 import { useState, useEffect } from "react";
-import { Inter } from "@next/font/google";
 
-import Head from "next/head";
-import Image from "next/image";
 import styled from "styled-components";
 import NavBar from "../components/NavBar";
 import axios from "axios";
@@ -13,11 +10,7 @@ const MainWrapper = styled.div`
 `;
 
 const fetchRssData = async (urlArray: string[]) => {
-  // const fetchedData = await (
-  //   await axios.get("http://localhost:3001/api/getRssData")
-  // ).data.name;
-
-  const fetchedData = await axios.post("http://localhost:3001/api/getRssData", {
+  const fetchedData = await axios.post("http://localhost:3000/api/getRssData", {
     urlArray,
   });
 
@@ -25,14 +18,10 @@ const fetchRssData = async (urlArray: string[]) => {
 };
 
 interface rssData {
-  status: string;
-  value: {
-    items: [
-      {
-        title: string;
-      }
-    ];
-  };
+  date: string;
+  title: string;
+  link: string;
+  id: string;
 }
 
 export default function Home() {
@@ -55,8 +44,6 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       const rssData = await fetchRssData(urlArray);
-      console.log(rssData.data);
-
       setRssData(rssData.data);
     }
     fetchData();

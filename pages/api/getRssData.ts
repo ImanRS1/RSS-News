@@ -1,7 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import RSSParser from "../../utils/RSSParser";
 import FeedHandler from "../../utils/FeedHandler";
-import FilterObjectsList from "../../utils/FilterObjectsList";
 import DateSorter from "../../utils/DateSorter";
 
 // type Data = {
@@ -19,16 +17,30 @@ import DateSorter from "../../utils/DateSorter";
 //   copyright: string;
 // };
 
+interface rssData {
+  date: string;
+  title: string;
+  link: string;
+  id: string;
+}
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<object>
 ) {
   const urlArray: string[] = await req.body.urlArray;
   const feed = await Promise.all(urlArray.map((url) => FeedHandler(url)));
-  const resultArray = feed.reduce((a, b) => a.concat(b), []);
+  const resultArray: [rssData] = feed.reduce((a, b) => a.concat(b), []);
 
-  const uniqueObjects = {};
-  resultArray.forEach((obj) => {
+  // const uniqueObjects: rssData = {
+  //   date: "",
+  //   title: "",
+  //   link: "",
+  //   id: "",
+  // };
+  const uniqueObjects: { [s: string]: unknown } | ArrayLike<unknown> = {};
+
+  resultArray.forEach((obj: {}) => {
     uniqueObjects[obj.id] = obj;
   });
 
