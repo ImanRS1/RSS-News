@@ -21,13 +21,19 @@ export default async function handler(
     "http://expressen.se/rss/sport",
   ];
 
-  const feed = await Promise.all(urlArray.map((url) => FeedHandler(url)));
-  const resultArray: rssData[] = feed.reduce((a, b) => a.concat(b), []);
+  try {
+    const feed = await Promise.all(urlArray.map((url) => FeedHandler(url)));
+    const resultArray: rssData[] = feed.reduce((a, b) => a.concat(b), []);
 
-  const ids = resultArray.map((thisRssObject) => thisRssObject.id);
-  const filteredArray = resultArray.filter(
-    ({ id }, index) => !ids.includes(id, index + 1)
-  );
-
-  return res.status(200).send(DateSorter(filteredArray));
+    const ids = resultArray.map((thisRssObject) => thisRssObject.id);
+    const filteredArray = resultArray.filter(
+      ({ id }, index) => !ids.includes(id, index + 1)
+    );
+    return res.status(200).send(DateSorter(filteredArray));
+  } catch (error: any) {
+    console.error("Could not fetch and parse data: ", error.message);
+    return res
+      .status(500)
+      .send({ errorMessage: "Något gick fel, försök igen senare." });
+  }
 }
