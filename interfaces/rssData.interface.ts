@@ -4,4 +4,5 @@ export interface rssData {
   id: string;
   title: string;
   content: string;
+  contentSnippet: string;
 }

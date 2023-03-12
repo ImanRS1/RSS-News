@@ -9,6 +9,7 @@ export default function FilterObjectsList(objectsList: FeedInterface) {
       id: item.guid,
       title: item.title,
       content: item.content,
+      contentSnippet: item.contentSnippet,
     };
   });
 }
