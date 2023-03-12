@@ -1,6 +1,7 @@
 export interface rssData {
-  date: string;
-  title: string;
+  date: Date;
   link: string;
   id: string;
+  title: string;
+  content: string;
 }

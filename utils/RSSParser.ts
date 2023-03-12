@@ -1,6 +1,8 @@
 import Parser from "rss-parser";
-const parser = new Parser();
+import { FeedInterface } from "../interfaces/feed.interface";
 
-export default async function RSSParser(url: any) {
+const parser: Parser<FeedInterface> = new Parser();
+
+export default async function RSSParser(url: string) {
   return await parser.parseURL(url);
 }
