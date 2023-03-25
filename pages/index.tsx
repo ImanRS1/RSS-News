@@ -39,10 +39,10 @@ const ContentContainer = styled.div`
 
   img {
     width: 15rem;
+    height: 10rem;
+    object-fit: cover;
   }
 `;
-
-const ImageContainer = styled.div``;
 
 let currentHost: string;
 if (typeof window !== "undefined") {
@@ -65,17 +65,17 @@ const parseContentImage = (content: string) => {
 export default function Home() {
   const [rssData, setRssData] = useState<[rssData]>();
   const [errorText, setErrorText] = useState<string>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     async function fetchData() {
-      const rssData = await fetchRssData();
-
-      if (rssData.data.errorMessage) {
-        setErrorText(rssData.data.errorMessage);
-        return;
+      try {
+        const rssData = await fetchRssData();
+        setLoading(false);
+        setRssData(rssData.data);
+      } catch (error: unknown) {
+        setErrorText("Något gick fel, försök igen senare.");
       }
-
-      setRssData(rssData.data);
     }
     fetchData();
   }, []);
@@ -84,15 +84,16 @@ export default function Home() {
     <MainWrapper>
       <NavBar />
       <LinkContainer>
+        {loading && <p>Laddar...</p>}
         {rssData &&
           rssData.map((data) => (
             <StyledAnchorTag key={data.id} href={data.link}>
               <>
-                <ArticleTitle>{data.title}</ArticleTitle>
+                <h3>{data.title}</h3>
                 <ContentContainer>
                   {parseContentImage(data.content)}
+                  {data.contentSnippet}
                 </ContentContainer>
-                {data.contentSnippet}
               </>
             </StyledAnchorTag>
           ))}
