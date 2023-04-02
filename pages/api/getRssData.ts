@@ -2,14 +2,17 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import feedHandler from "../../utils/feedHandler";
 import dateSorter from "../../utils/dateSorter";
 import { rssData } from "../../interfaces/rssData.interface";
-import { urlArray } from "../../utils/urlArray";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<object>
 ) {
+  const { urlArray } = req.body;
   try {
-    const feed = await Promise.all(urlArray.map((url) => feedHandler(url)));
+    const feed = await Promise.all(
+      urlArray.map((url: string) => feedHandler(url))
+    );
+
     const resultArray: rssData[] = feed.reduce((a, b) => a.concat(b), []);
 
     const ids = resultArray.map((thisRssObject) => thisRssObject.id);

@@ -1,26 +1,43 @@
+import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
 import { urlArray } from "../utils/urlArray";
 
 const generateNavbarLinks = (urlArray: string[]) => {
-  return urlArray.map((url) => <p>{url.split("/").at(-1)}</p>);
+  return urlArray.map((url: string) => (
+    <Link href={`${url.split("/").at(-1)}`} key={url}>
+      <p>{url.split("/").at(-1)}</p>
+    </Link>
+  ));
 };
 
 const Navbar = () => {
   return (
     <Wrapper>
-      <Title>RSS News</Title>
-      <CategoryContainer>{generateNavbarLinks(urlArray)}</CategoryContainer>
+      <MainContainer>
+        <Title>
+          <Link href="/">RSS News</Link>
+        </Title>
+        <CategoryContainer>{generateNavbarLinks(urlArray)}</CategoryContainer>
+      </MainContainer>
     </Wrapper>
   );
 };
+
+const MainContainer = styled.div`
+  width: 1440px;
+  display: flex;
+  align-items: center;
+`;
 
 const Wrapper = styled.div`
   background-color: #fefefe;
   border-bottom: 3px solid red;
   display: flex;
-  align-items: center;
+  justify-content: center;
   height: 50px;
+  width: 100vw;
+  position: fixed;
 `;
 
 const Title = styled.div`

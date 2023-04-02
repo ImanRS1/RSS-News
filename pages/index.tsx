@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import axios from "axios";
 import { rssData } from "../interfaces/rssData.interface";
 import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
+import { urlArray } from "../utils/urlArray";
+import fetchRssData from "../utils/fetchRssData";
 
 const MainWrapper = styled.div`
   max-width: 1440px;
   margin: 0 auto;
+  padding-top: 5rem;
 `;
 
 const ArticleContainer = styled.div`
@@ -20,16 +22,6 @@ const ArticleContainer = styled.div`
   align-items: center;
 `;
 
-let currentHost: string;
-if (typeof window !== "undefined") {
-  currentHost = window.location.host;
-}
-
-const fetchRssData = async () => {
-  const fetchedData = await axios.get(`http://${currentHost}/api/getRssData`);
-  return fetchedData;
-};
-
 export default function Home() {
   const [rssData, setRssData] = useState<[rssData]>();
   const [errorText, setErrorText] = useState<string>();
@@ -38,9 +30,9 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const rssData = await fetchRssData();
+        const rssData = await fetchRssData(urlArray);
         setLoading(false);
-        setRssData(rssData.data);
+        setRssData(rssData?.data);
       } catch (error: unknown) {
         setErrorText("Något gick fel, försök igen senare.");
       }
@@ -50,7 +42,6 @@ export default function Home() {
 
   return (
     <>
-      <Navbar />
       <MainWrapper>
         <ArticleContainer>
           {loading && <p>Laddar...</p>}

@@ -1,4 +1,5 @@
 export const urlArray: string[] = [
+  "https://feeds.expressen.se/dinapengar",
   "http://expressen.se/rss/debatt",
   "http://gt.se/rss/nyheter",
   "https://feeds.expressen.se/kvallsposten",
