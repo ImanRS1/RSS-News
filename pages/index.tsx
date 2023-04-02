@@ -49,16 +49,18 @@ export default function Home() {
   }, []);
 
   return (
-    <MainWrapper>
+    <>
       <NavBar />
-      <ArticleContainer>
-        {loading && <p>Laddar...</p>}
-        {rssData &&
-          rssData.map((data) => (
-            <Article key={data.id} href={data.link} data={data} />
-          ))}
-        {errorText && ErrorText(errorText)}
-      </ArticleContainer>
-    </MainWrapper>
+      <MainWrapper>
+        <ArticleContainer>
+          {loading && <p>Laddar...</p>}
+          {rssData &&
+            rssData.map((data) => (
+              <Article key={data.id} href={data.link} data={data} />
+            ))}
+          {errorText && ErrorText(errorText)}
+        </ArticleContainer>
+      </MainWrapper>
+    </>
   );
 }
