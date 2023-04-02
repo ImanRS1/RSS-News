@@ -1,7 +1,7 @@
 import { FeedInterface } from "../interfaces/feed.interface";
 import { rssItem } from "../interfaces/rssItem.interface";
 
-export default function FilterObjectsList(objectsList: FeedInterface) {
+export default function filterObjectsList(objectsList: FeedInterface) {
   return objectsList.items.map((item: rssItem) => {
     return {
       date: item.isoDate,
