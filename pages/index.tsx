@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import styled from "styled-components";
-import NavBar from "../components/NavBar";
+import Navbar from "../components/Navbar";
 import axios from "axios";
 import { rssData } from "../interfaces/rssData.interface";
 import ErrorText from "../components/ErrorText";
@@ -50,7 +50,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBar />
+      <Navbar />
       <MainWrapper>
         <ArticleContainer>
           {loading && <p>Laddar...</p>}
