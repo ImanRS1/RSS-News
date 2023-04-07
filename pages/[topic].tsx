@@ -24,7 +24,6 @@ const topic = () => {
         );
         const rssData = await fetchRssData(currentUrl);
         setLoading(false);
-        console.log(rssData);
         setRssData(rssData?.data);
       } catch (error: unknown) {
         setErrorText("Något gick fel, försök igen senare.");
