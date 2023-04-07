@@ -1,15 +1,14 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
+import getCategoryFromUrl from "../utils/getCategoryFromUrl";
 import { urlArray } from "../utils/urlArray";
-import urlNames from "../utils/urlEnum";
 
 const generateNavbarLinks = (urlArray: string[]) => {
   return urlArray.map((url: string) => {
-    const urlEnd = `${url.split("/").at(-1)}`;
     return (
       <Link href={`${url.split("/").at(-1)}`} key={url}>
-        <p>{urlNames[urlEnd as keyof object]}</p>
+        <p>{getCategoryFromUrl(url)}</p>
       </Link>
     );
   });

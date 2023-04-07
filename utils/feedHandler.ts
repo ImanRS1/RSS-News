@@ -4,6 +4,6 @@ import rssParser from "./rssParser";
 
 export default async function feedHandler(url: string) {
   const feed = await rssParser(url);
-  const relativeObject = filterObjectsList(feed);
+  const relativeObject = filterObjectsList(feed, url);
   return dateSorter(relativeObject);
 }

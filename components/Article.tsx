@@ -30,6 +30,7 @@ const ContentContainer = styled.div`
 export const Article = ({ href, data }: { href: string; data: rssData }) => {
   return (
     <LinkWrapper href={href}>
+      <p>{data.category}</p>
       <h3>{data.title}</h3>
       <ContentContainer>
         {parseContentImage(data.content)}
