@@ -7,9 +7,15 @@ const ContentContainer = ({ children }: PropsWithChildren) => {
 
 const Container = styled.div`
   display: flex;
-  p {
+
+  .text-content {
     display: flex;
     flex-direction: column;
+    padding: 5px;
+
+    h3 {
+      margin-top: 0;
+    }
   }
 
   img {

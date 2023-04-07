@@ -10,10 +10,12 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
         <p style={{ textAlign: "end" }}>{data.category}</p>
       )}
 
-      <h3>{data.title}</h3>
       <ContentContainer>
         {parseContentImage(data.content)}
-        {data.contentSnippet}
+        <div className="text-content">
+          <h3>{data.title}</h3>
+          {data.contentSnippet}
+        </div>
       </ContentContainer>
     </Wrapper>
   );
@@ -21,6 +23,7 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
 
 const Wrapper = styled.a`
   border: 2px solid red;
+  width: 100%;
   border-radius: 1rem;
   font-size: 1.5rem;
   margin: 1rem;
