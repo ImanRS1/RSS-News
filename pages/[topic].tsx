@@ -6,7 +6,7 @@ import { urlArray } from "../utils/urlArray";
 import styled from "styled-components";
 import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
-import { ArticleContainer } from ".";
+import { ArticleContainer, MainWrapper } from ".";
 
 const topic = () => {
   const [rssData, setRssData] = useState<[rssData]>();
@@ -34,7 +34,7 @@ const topic = () => {
   }, [topic]);
 
   return (
-    <div>
+    <MainWrapper>
       <ArticleContainer>
         {loading && <p>Laddar...</p>}
         {rssData &&
@@ -43,7 +43,7 @@ const topic = () => {
           ))}
         {errorText && ErrorText(errorText)}
       </ArticleContainer>
-    </div>
+    </MainWrapper>
   );
 };
 

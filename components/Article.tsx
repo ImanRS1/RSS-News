@@ -45,7 +45,7 @@ const Wrapper = styled.a`
 
   &:hover {
     img {
-      filter: brightness(1.1);
+      filter: brightness(1.08);
     }
   }
 `;

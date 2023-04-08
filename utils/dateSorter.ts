@@ -5,5 +5,5 @@ export default function dateSorter(unsortedArray: rssData[]): rssData[] {
     (a: rssData, b: rssData) =>
       new Date(b.date).valueOf() - new Date(a.date).valueOf()
   );
-  return newAr.slice(0, 15);
+  return newAr.slice(0, 20);
 }

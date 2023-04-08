@@ -42,14 +42,14 @@ export default function Home() {
   );
 }
 
-const MainWrapper = styled.div`
+export const MainWrapper = styled.div`
   max-width: 1440px;
   margin: 0 auto;
 `;
 
 export const ArticleContainer = styled.div`
+  margin: 90px auto 20px auto;
   width: 80%;
-  margin: 80px auto 20px auto;
   display: flex;
   flex-direction: column;
   align-items: center;

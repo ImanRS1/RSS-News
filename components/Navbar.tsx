@@ -22,24 +22,23 @@ const renderCategories = (url: string) => {
   );
 };
 
-const generateNavbarLinks = (urlArray: string[]) => {
-  return urlArray.map((url: string) => {
-    return (
-      <Link href={`${url.split("/").at(-1)}`} key={url}>
-        {renderCategories(url)}
-      </Link>
-    );
-  });
-};
+const generateNavbarLinks = (urlArray: string[]) =>
+  urlArray.map((url: string) => (
+    <Link href={`${url.split("/").at(-1)}`} key={url}>
+      {renderCategories(url)}
+    </Link>
+  ));
 
 const Navbar = () => {
   return (
     <Wrapper>
       <MainContainer>
-        <Title className={montserrat.className}>
-          <Link href="/">RSS News</Link>
-        </Title>
-        <CategoryContainer>{generateNavbarLinks(urlArray)}</CategoryContainer>
+        <div className="sub-container">
+          <Title className={montserrat.className}>
+            <Link href="/">RSS News</Link>
+          </Title>
+          <CategoryContainer>{generateNavbarLinks(urlArray)}</CategoryContainer>
+        </div>
       </MainContainer>
     </Wrapper>
   );
@@ -47,17 +46,24 @@ const Navbar = () => {
 
 const MainContainer = styled.div`
   width: 1440px;
-  padding: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  .sub-container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 
 const Wrapper = styled.div`
   background-color: #fefefe;
   display: flex;
   justify-content: center;
-  height: 60px;
+  height: 80px;
   width: 100vw;
   position: fixed;
   top: 0;
@@ -83,8 +89,7 @@ const Title = styled.div`
 
 const CategoryContainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
-  width: 1100px;
+  justify-content: space-between;
 
   .active {
     transform: scale(1.1);
