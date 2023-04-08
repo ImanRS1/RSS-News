@@ -3,6 +3,12 @@ import React from "react";
 import styled from "styled-components";
 import getCategoryFromUrl from "../utils/getCategoryFromUrl";
 import { urlArray } from "../utils/urlArray";
+import { Montserrat } from "@next/font/google";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weight: ["400"],
+});
 
 const generateNavbarLinks = (urlArray: string[]) => {
   return urlArray.map((url: string) => {
@@ -18,7 +24,7 @@ const Navbar = () => {
   return (
     <Wrapper>
       <MainContainer>
-        <Title>
+        <Title className={montserrat.className}>
           <Link href="/">RSS News</Link>
         </Title>
         <CategoryContainer>{generateNavbarLinks(urlArray)}</CategoryContainer>
