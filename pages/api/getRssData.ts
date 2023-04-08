@@ -7,8 +7,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<object>
 ) {
-  const { urlArray } = req.body;
   try {
+    const { urlArray } = req.body;
     const feed = await Promise.all(
       urlArray.map((url: string) => feedHandler(url))
     );
