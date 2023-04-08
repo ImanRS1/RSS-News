@@ -61,6 +61,7 @@ const Wrapper = styled.div`
   width: 100vw;
   position: fixed;
   top: 0;
+  z-index: 10;
   box-shadow: inset 0px -3px 5px -5px rgba(0, 0, 0, 0.75);
 
   a {

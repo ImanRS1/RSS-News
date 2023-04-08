@@ -42,4 +42,10 @@ const Wrapper = styled.a`
   color: black;
   box-sizing: border-box;
   padding-top: 20px;
+
+  &:hover {
+    img {
+      filter: brightness(1.1);
+    }
+  }
 `;
