@@ -6,6 +6,7 @@ import { urlArray } from "../utils/urlArray";
 import styled from "styled-components";
 import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
+import { ArticleContainer } from ".";
 
 const topic = () => {
   const [rssData, setRssData] = useState<[rssData]>();
@@ -45,14 +46,5 @@ const topic = () => {
     </div>
   );
 };
-
-const ArticleContainer = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 5rem;
-`;
 
 export default topic;

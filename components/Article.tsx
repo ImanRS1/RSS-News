@@ -7,7 +7,7 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
   return (
     <Wrapper href={href}>
       {window.location.pathname.length === 1 && (
-        <p style={{ textAlign: "end" }}>{data.category}</p>
+        <CategoryInfo>{data.category}</CategoryInfo>
       )}
 
       <ContentContainer>
@@ -17,18 +17,29 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
           {data.contentSnippet}
         </div>
       </ContentContainer>
+      <Line />
     </Wrapper>
   );
 };
 
+const Line = styled.div`
+  height: 0.5px;
+  margin: 20px auto 0 auto;
+  border-bottom: 2px solid #e8e8e8;
+`;
+
+const CategoryInfo = styled.div`
+  text-align: end;
+  font-weight: 300;
+  font-size: 17px;
+  letter-spacing: 2px;
+`;
+
 const Wrapper = styled.a`
-  border: 2px solid red;
-  width: 100%;
-  border-radius: 1rem;
+  width: 95%;
   font-size: 1.5rem;
-  margin: 1rem;
   text-decoration: none;
   color: black;
-  padding: 0.5rem;
   box-sizing: border-box;
+  padding-top: 20px;
 `;

@@ -8,20 +8,6 @@ import { Article } from "../components/Article";
 import { urlArray } from "../utils/urlArray";
 import fetchRssData from "../utils/fetchRssData";
 
-const MainWrapper = styled.div`
-  max-width: 1440px;
-  margin: 0 auto;
-  padding-top: 5rem;
-`;
-
-const ArticleContainer = styled.div`
-  width: 80%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 export default function Home() {
   const [rssData, setRssData] = useState<[rssData]>();
   const [errorText, setErrorText] = useState<string>();
@@ -55,3 +41,18 @@ export default function Home() {
     </>
   );
 }
+
+const MainWrapper = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
+`;
+
+export const ArticleContainer = styled.div`
+  width: 80%;
+  margin: 80px auto 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fefefe;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+`;
