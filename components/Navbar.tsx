@@ -4,17 +4,29 @@ import styled from "styled-components";
 import getCategoryFromUrl from "../utils/getCategoryFromUrl";
 import { urlArray } from "../utils/urlArray";
 import { Montserrat } from "@next/font/google";
+import { usePathname } from "next/navigation";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400"],
 });
 
+const renderCategories = (url: string) => {
+  const pathname = usePathname()?.split("/")[1];
+  const urlEnd = `${url.split("/").at(-1)}`;
+
+  return (
+    <p className={pathname === urlEnd ? "active" : ""}>
+      {getCategoryFromUrl(url)}
+    </p>
+  );
+};
+
 const generateNavbarLinks = (urlArray: string[]) => {
   return urlArray.map((url: string) => {
     return (
       <Link href={`${url.split("/").at(-1)}`} key={url}>
-        <p>{getCategoryFromUrl(url)}</p>
+        {renderCategories(url)}
       </Link>
     );
   });
@@ -72,6 +84,12 @@ const CategoryContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   width: 1100px;
+
+  .active {
+    transform: scale(1.1);
+    color: black;
+    text-shadow: 0.2px 0.2px 0.2px black;
+  }
 `;
 
 export default Navbar;
