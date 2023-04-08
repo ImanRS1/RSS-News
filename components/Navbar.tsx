@@ -29,34 +29,42 @@ const Navbar = () => {
 
 const MainContainer = styled.div`
   width: 1440px;
+  padding: 20px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 `;
 
 const Wrapper = styled.div`
   background-color: #fefefe;
-  border-bottom: 3px solid red;
   display: flex;
   justify-content: center;
-  height: 50px;
+  height: 60px;
   width: 100vw;
   position: fixed;
+  box-shadow: inset 0px -3px 5px -5px rgba(0, 0, 0, 0.75);
+
+  a {
+    text-decoration: none;
+    color: #303030;
+    font-weight: lighter;
+
+    &:hover {
+      transform: scale(1.05);
+      text-shadow: 0.2px 0.2px 0.2px black;
+    }
+  }
 `;
 
 const Title = styled.div`
   font-size: 25px;
-  width: 250px;
-  margin-left: 10px;
+  width: 150px;
 `;
 
 const CategoryContainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   width: 1100px;
-
-  p::first-letter {
-    text-transform: capitalize;
-  }
 `;
 
 export default Navbar;
