@@ -5,7 +5,7 @@ import ContentContainer from "./ContentContainer";
 
 export const Article = ({ href, data }: { href: string; data: rssData }) => {
   return (
-    <Wrapper href={href}>
+    <Wrapper href={href} target="_blank">
       {window.location.pathname.length === 1 && (
         <CategoryInfo>{data.category}</CategoryInfo>
       )}
