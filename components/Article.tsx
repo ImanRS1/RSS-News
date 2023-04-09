@@ -22,20 +22,20 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
   );
 };
 
-const Line = styled.div`
+export const Line = styled.div`
   height: 0.5px;
   margin: 20px auto 0 auto;
   border-bottom: 2px solid #e8e8e8;
 `;
 
-const CategoryInfo = styled.div`
+export const CategoryInfo = styled.div`
   text-align: end;
   font-weight: 300;
   font-size: 17px;
   letter-spacing: 2px;
 `;
 
-const Wrapper = styled.a`
+export const Wrapper = styled.a`
   width: 95%;
   font-size: 1.5rem;
   text-decoration: none;

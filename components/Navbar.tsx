@@ -63,7 +63,7 @@ const Wrapper = styled.div`
   background-color: #fefefe;
   display: flex;
   justify-content: center;
-  height: 80px;
+  height: 100px;
   width: 100vw;
   position: fixed;
   top: 0;

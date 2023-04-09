@@ -7,6 +7,7 @@ import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
 import { urlArray } from "../utils/urlArray";
 import fetchRssData from "../utils/fetchRssData";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 export default function Home() {
   const [rssData, setRssData] = useState<[rssData]>();
@@ -20,6 +21,7 @@ export default function Home() {
         setLoading(false);
         setRssData(rssData?.data);
       } catch (error: unknown) {
+        setLoading(false);
         setErrorText("Något gick fel, försök igen senare.");
       }
     }
@@ -30,7 +32,7 @@ export default function Home() {
     <>
       <MainWrapper>
         <ArticleContainer>
-          {loading && <p>Laddar...</p>}
+          {loading && <SkeletonLoader />}
           {rssData &&
             rssData.map((data) => (
               <Article key={data.id} href={data.link} data={data} />
@@ -48,7 +50,7 @@ export const MainWrapper = styled.div`
 `;
 
 export const ArticleContainer = styled.div`
-  margin: 90px auto 20px auto;
+  margin: 110px auto 20px auto;
   width: 80%;
   display: flex;
   flex-direction: column;

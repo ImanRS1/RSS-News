@@ -3,10 +3,10 @@ import { rssData } from "../interfaces/rssData.interface";
 import { useRouter } from "next/router";
 import fetchRssData from "../utils/fetchRssData";
 import { urlArray } from "../utils/urlArray";
-import styled from "styled-components";
 import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
 import { ArticleContainer, MainWrapper } from ".";
+import SkeletonLoader from "../components/SkeletonLoader";
 
 const topic = () => {
   const [rssData, setRssData] = useState<[rssData]>();
@@ -36,7 +36,7 @@ const topic = () => {
   return (
     <MainWrapper>
       <ArticleContainer>
-        {loading && <p>Laddar...</p>}
+        {loading && <SkeletonLoader />}
         {rssData &&
           rssData.map((data) => (
             <Article key={data.id} href={data.link} data={data} />
