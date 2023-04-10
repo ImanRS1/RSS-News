@@ -1,7 +1,6 @@
 import { FeedInterface } from "../interfaces/feed.interface";
 import { rssItem } from "../interfaces/rssItem.interface";
 import getCategoryFromUrl from "./getCategoryFromUrl";
-import urlNames from "./urlEnum";
 
 export default function filterObjectsList(
   objectsList: FeedInterface,

@@ -9,6 +9,7 @@ export default async function handler(
 ) {
   try {
     const { urlArray } = req.body;
+
     const feed = await Promise.all(
       urlArray.map((url: string) => feedHandler(url))
     );
@@ -16,9 +17,11 @@ export default async function handler(
     const resultArray: rssData[] = feed.reduce((a, b) => a.concat(b), []);
 
     const ids = resultArray.map((thisRssObject) => thisRssObject.id);
+
     const filteredArray = resultArray.filter(
       ({ id }, index) => !ids.includes(id, index + 1)
     );
+
     return res.status(200).send(dateSorter(filteredArray));
   } catch (error: any) {
     console.error("Could not fetch and parse data: ", error.message);
