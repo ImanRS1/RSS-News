@@ -46,7 +46,7 @@ const mockFilteredObjectsList = [
 ];
 
 describe("filterObjectsList tests", () => {
-  it("should filter and return relevant data based on a unfileted list of objects", () =>
+  it("should filter and return relevant data based on an unfiltered list of objects", () =>
     expect(
       filterObjectsList(mockObjectsList, "http://expressen.se/rss/res")
     ).toEqual(mockFilteredObjectsList));
