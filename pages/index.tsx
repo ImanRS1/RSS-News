@@ -17,7 +17,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const rssData = await fetchRssData(urlArray);
+        const rssData = await fetchRssData(urlArray, true);
         setLoading(false);
         setRssData(rssData?.data);
       } catch (error: unknown) {

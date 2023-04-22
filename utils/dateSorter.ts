@@ -1,11 +1,16 @@
 import { rssData } from "../interfaces/rssData.interface";
+import reduceAmountOfSportNews from "./reduceAmountOfSportNews";
 
-export default function dateSorter(unsortedArray: rssData[]): rssData[] {
+export default function dateSorter(
+  unsortedArray: rssData[],
+  totalFetch?: boolean
+): rssData[] {
   const newAr: rssData[] = unsortedArray.sort(
     (a: rssData, b: rssData) =>
       new Date(b.date).valueOf() - new Date(a.date).valueOf()
   );
 
-  if (newAr[0]?.category === "Sport") return newAr.slice(0, 3);
+  if (totalFetch) return reduceAmountOfSportNews(newAr).slice(0, 20);
+
   return newAr.slice(0, 20);
 }

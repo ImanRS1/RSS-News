@@ -8,10 +8,12 @@ export default async function handler(
   res: NextApiResponse<object>
 ) {
   try {
-    const { urlArray } = req.body;
+    const { urlArray, totalFetch } = req.body;
 
     const feed = await Promise.all(
-      urlArray.map((url: string) => feedHandler(url))
+      urlArray.map((url: string, totalFetch?: boolean) =>
+        feedHandler(url, totalFetch)
+      )
     );
 
     const resultArray: rssData[] = feed.reduce((a, b) => a.concat(b), []);
