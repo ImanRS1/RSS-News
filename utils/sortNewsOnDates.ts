@@ -1,7 +1,7 @@
 import { rssData } from "../interfaces/rssData.interface";
 import reduceAmountOfSportNews from "./reduceAmountOfSportNews";
 
-export default function dateSorter(
+export default function sortNewsOnDates(
   unsortedArray: rssData[],
   totalFetch?: boolean
 ): rssData[] {

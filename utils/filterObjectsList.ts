@@ -7,15 +7,14 @@ export default function filterObjectsList(
   url: string
 ) {
   const category = getCategoryFromUrl(url);
-  return objectsList.items.map((item: rssItem) => {
-    return {
-      category,
-      date: item.isoDate,
-      link: item.link,
-      id: item.guid,
-      title: item.title,
-      content: item.content,
-      contentSnippet: item.contentSnippet,
-    };
-  });
+
+  return objectsList.items.map((item: rssItem) => ({
+    category,
+    date: item.isoDate,
+    link: item.link,
+    id: item.guid,
+    title: item.title,
+    content: item.content,
+    contentSnippet: item.contentSnippet,
+  }));
 }

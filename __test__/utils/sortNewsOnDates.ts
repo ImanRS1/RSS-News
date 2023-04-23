@@ -1,6 +1,6 @@
 import "@testing-library/jest-dom";
 import { rssData } from "../../interfaces/rssData.interface";
-import dateSorter from "../../utils/dateSorter";
+import sortNewsOnDates from "../../utils/sortNewsOnDates";
 
 const mockFilteredObjectsList: rssData[] = [
   {
@@ -74,7 +74,9 @@ const mockDateSortedList = [
   },
 ];
 
-describe("dateSoter tests", () => {
+describe("sortNewsOnDates tests", () => {
   it("should sort articles based on a filtered list of objects", () =>
-    expect(dateSorter(mockFilteredObjectsList)).toEqual(mockDateSortedList));
+    expect(sortNewsOnDates(mockFilteredObjectsList)).toEqual(
+      mockDateSortedList
+    ));
 });

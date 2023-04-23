@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import feedHandler from "../../utils/feedHandler";
-import dateSorter from "../../utils/dateSorter";
+import sortOnNewsDates from "../../utils/sortNewsOnDates";
 import { rssData } from "../../interfaces/rssData.interface";
 
 export default async function handler(
@@ -10,21 +10,24 @@ export default async function handler(
   try {
     const { urlArray, totalFetch } = req.body;
 
-    const feed = await Promise.all(
+    const feeds = await Promise.all(
       urlArray.map((url: string, totalFetch?: boolean) =>
         feedHandler(url, totalFetch)
       )
     );
 
-    const resultArray: rssData[] = feed.reduce((a, b) => a.concat(b), []);
+    const concatenatedFeeds: rssData[] = feeds.reduce(
+      (a, b) => a.concat(b),
+      []
+    );
 
-    const ids = resultArray.map((thisRssObject) => thisRssObject.id);
+    const ids = concatenatedFeeds.map((thisRssObject) => thisRssObject.id);
 
-    const filteredArray = resultArray.filter(
+    const uniqueArticles = concatenatedFeeds.filter(
       ({ id }, index) => !ids.includes(id, index + 1)
     );
 
-    return res.status(200).send(dateSorter(filteredArray));
+    return res.status(200).send(sortOnNewsDates(uniqueArticles));
   } catch (error: any) {
     console.error("Could not fetch and parse data: ", error.message);
     return res
