@@ -75,7 +75,7 @@ const mockDateSortedList = [
 ];
 
 describe("sortNewsOnDates tests", () => {
-  it("should sort articles based on a filtered list of objects", () =>
+  it("should sort articles based on a filtered list of news objects", () =>
     expect(sortNewsOnDates(mockFilteredObjectsList)).toEqual(
       mockDateSortedList
     ));
