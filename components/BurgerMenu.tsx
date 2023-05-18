@@ -1,19 +1,23 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Theme from "../themes/theme";
+import BurgerMenuOptions from "./BurgerMenuOptions";
 
 const theme = Theme();
 
 const BurgerMenu = () => {
   const [clicked, setClicked] = useState(false);
   return (
-    <Container onClick={() => setClicked(!clicked)}>
-      <div className={clicked ? "icon nav-icon-2 open" : "icon nav-icon-2"}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
-    </Container>
+    <>
+      <Container onClick={() => setClicked(!clicked)}>
+        <div className={clicked ? "icon nav-icon-2 open" : "icon nav-icon-2"}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </Container>
+      {clicked && <BurgerMenuOptions setClicked={setClicked} />}
+    </>
   );
 };
 
