@@ -8,6 +8,9 @@ import { Article } from "../components/Article";
 import { urlArray } from "../utils/urlArray";
 import fetchRssData from "../utils/fetchRssData";
 import SkeletonLoader from "../components/SkeletonLoader";
+import Theme from "../themes/theme";
+
+const theme = Theme();
 
 export default function Home() {
   const [rssData, setRssData] = useState<[rssData]>();
@@ -55,6 +58,6 @@ export const ArticleContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fefefe;
+  background-color: ${theme.grey1};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 `;
