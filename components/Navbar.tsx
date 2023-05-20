@@ -1,12 +1,11 @@
 import Link from "next/link";
 import React from "react";
 import styled from "styled-components";
-import getCategoryFromUrl from "../utils/getCategoryFromUrl";
 import { urlArray } from "../utils/urlArray";
 import { Montserrat } from "@next/font/google";
-import { usePathname } from "next/navigation";
 import Theme from "../themes/theme";
 import BurgerMenu from "./BurgerMenu";
+import { generateNavbarLinks } from "../utils/generateNavbarLinks";
 
 const theme = Theme();
 
@@ -14,24 +13,6 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   weight: ["400"],
 });
-
-const renderCategories = (url: string) => {
-  const pathname = usePathname()?.split("/")[1];
-  const urlEnd = `${url.split("/").at(-1)}`;
-
-  return (
-    <p className={pathname === urlEnd ? "active" : ""}>
-      {getCategoryFromUrl(url)}
-    </p>
-  );
-};
-
-export const generateNavbarLinks = (urlArray: string[]) =>
-  urlArray.map((url: string) => (
-    <Link href={`${url.split("/").at(-1)}`} key={url}>
-      {renderCategories(url)}
-    </Link>
-  ));
 
 const Navbar = () => {
   return (

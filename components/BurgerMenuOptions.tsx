@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Theme from "../themes/theme";
-import { generateNavbarLinks } from "./Navbar";
 import { urlArray } from "../utils/urlArray";
+import { generateNavbarLinks } from "../utils/generateNavbarLinks";
 
 const theme = Theme();
 
