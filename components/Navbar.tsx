@@ -26,7 +26,7 @@ const renderCategories = (url: string) => {
   );
 };
 
-const generateNavbarLinks = (urlArray: string[]) =>
+export const generateNavbarLinks = (urlArray: string[]) =>
   urlArray.map((url: string) => (
     <Link href={`${url.split("/").at(-1)}`} key={url}>
       {renderCategories(url)}

@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { rssData } from "../interfaces/rssData.interface";
 import parseContentImage from "../utils/parseContentImage";
 import ContentContainer from "./ContentContainer";
+import Theme from "../themes/theme";
+
+const theme = Theme();
 
 export const Article = ({ href, data }: { href: string; data: rssData }) => {
   return (
@@ -25,7 +28,7 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
 export const Line = styled.div`
   height: 0.5px;
   margin: 20px auto 0 auto;
-  border-bottom: 2px solid #e8e8e8;
+  border-bottom: 2px solid ${theme.grey2};
 `;
 
 export const CategoryInfo = styled.div`

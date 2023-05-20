@@ -2,7 +2,7 @@ export default function Theme() {
   return {
     black1: "#303030",
     grey1: "#fefefe",
-    grey2: "#838691",
+    grey2: "#e8e8e8",
     grey3: "#EDEDF0",
     grey4: "#BDBDBD",
     grey5: "#FBFBFB",
