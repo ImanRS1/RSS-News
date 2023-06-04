@@ -2,26 +2,29 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Theme from "../themes/theme";
 import BurgerMenuOptions from "./BurgerMenuOptions";
+import { motion, AnimatePresence } from "framer-motion";
 
 const theme = Theme();
 
 const BurgerMenu = () => {
   const [clicked, setClicked] = useState(false);
   return (
-    <>
-      <Container onClick={() => setClicked(!clicked)}>
+    <AnimatePresence>
+      <Container onClick={() => setClicked(!clicked)} key="bm-container">
         <div className={clicked ? "icon nav-icon-2 open" : "icon nav-icon-2"}>
           <span></span>
           <span></span>
           <span></span>
         </div>
       </Container>
-      {clicked && <BurgerMenuOptions setClicked={setClicked} />}
-    </>
+      {clicked && (
+        <BurgerMenuOptions setClicked={setClicked} key="bm-options" />
+      )}
+    </AnimatePresence>
   );
 };
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   display: none;
   transform: scale(0.8);
   .nav-icon-2 {

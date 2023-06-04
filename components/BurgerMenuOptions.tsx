@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import Theme from "../themes/theme";
 import { urlArray } from "../utils/urlArray";
 import { generateNavbarLinks } from "../utils/generateNavbarLinks";
+import { motion } from "framer-motion";
 
 const theme = Theme();
 
@@ -12,12 +13,18 @@ interface ChildProps {
 
 const BurgerMenuOptions = ({ setClicked }: ChildProps) => {
   return (
-    <Container onClick={() => setClicked(false)}>
+    <Container
+      initial={{ y: -300, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      exit={{ y: -500, transition: { duration: 0.3 }, opacity: 0 }}
+      onClick={() => setClicked(false)}
+    >
       {generateNavbarLinks(urlArray)}
     </Container>
   );
 };
-const Container = styled.div`
+const Container = styled(motion.div)`
   position: absolute;
   right: 0.2px;
   top: 100px;
