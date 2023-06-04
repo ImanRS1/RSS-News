@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 
 import styled from "styled-components";
-import Navbar from "../components/Navbar";
 import { rssData } from "../interfaces/rssData.interface";
 import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
@@ -60,4 +59,8 @@ export const ArticleContainer = styled.div`
   align-items: center;
   background-color: ${theme.grey1};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  ${theme.breakpoints.mobileAndTablet} {
+    width: 95%;
+  }
 `;
