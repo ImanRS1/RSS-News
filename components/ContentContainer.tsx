@@ -22,10 +22,6 @@ const Container = styled.div`
     flex-direction: column;
     padding: 5px;
     margin-left: 10px;
-
-    h3 {
-      margin-top: 0;
-    }
   }
 
   img {

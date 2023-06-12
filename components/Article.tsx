@@ -4,6 +4,7 @@ import parseContentImage from "../utils/parseContentImage";
 import ContentContainer from "./ContentContainer";
 import Theme from "../themes/theme";
 import Paragraph from "./Paragraph";
+import Header from "./Header";
 
 const theme = Theme();
 
@@ -18,13 +19,13 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
         <div className="desktop-content">
           {parseContentImage(data.content)}
           <div className="text-content">
-            <h3>{data.title}</h3>
+            <Header>{data.title}</Header>
             <Paragraph>{data.contentSnippet}</Paragraph>
           </div>
         </div>
         <div className="mobile-content">
           <div className="header-content">
-            <h3>{data.title}</h3>
+            <Header>{data.title}</Header>
             {parseContentImage(data.content)}
           </div>
           <div className="text-content">
@@ -52,7 +53,6 @@ export const CategoryInfo = styled.div`
 
 export const Wrapper = styled.a`
   width: 95%;
-  font-size: 1.5rem;
   text-decoration: none;
   color: black;
   box-sizing: border-box;
