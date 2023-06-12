@@ -11,10 +11,6 @@ const ContentContainer = ({ children }: PropsWithChildren) => {
 const Container = styled.div`
   .desktop-content {
     display: flex;
-
-    ${theme.breakpoints.mobile} {
-      display: none;
-    }
   }
 
   .text-content {
@@ -33,23 +29,31 @@ const Container = styled.div`
   .mobile-content {
     display: none;
 
-    ${theme.breakpoints.mobile} {
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  ${theme.breakpoints.mobile} {
+    .desktop-content {
+      display: none;
+    }
+    .mobile-content {
       display: flex;
       flex-direction: row-reverse;
       flex-direction: column;
 
       img {
         margin-left: 10px;
+        width: 10rem;
+        height: 5rem;
       }
 
       .text-content {
         margin-left: 0;
         margin-top: 10px;
       }
-    }
-
-    .header-content {
-      display: flex;
     }
   }
 `;
