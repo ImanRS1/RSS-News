@@ -9,15 +9,24 @@ const theme = Theme();
 export const Article = ({ href, data }: { href: string; data: rssData }) => {
   return (
     <Wrapper href={href} target="_blank">
-      {window.location.pathname.length === 1 && (
+      {window?.location?.pathname?.length === 1 && (
         <CategoryInfo>{data.category}</CategoryInfo>
       )}
 
       <ContentContainer>
-        {parseContentImage(data.content)}
-        <div className="text-content">
-          <h3>{data.title}</h3>
-          {data.contentSnippet}
+        <div className="desktop-content">
+          {parseContentImage(data.content)}
+          <div className="text-content">
+            <h3>{data.title}</h3>
+            {data.contentSnippet}
+          </div>
+        </div>
+        <div className="mobile-content">
+          <div className="header-content">
+            <h3>{data.title}</h3>
+            {parseContentImage(data.content)}
+          </div>
+          <div className="text-content">{data.contentSnippet}</div>
         </div>
       </ContentContainer>
       <Line />
