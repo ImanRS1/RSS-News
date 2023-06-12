@@ -11,6 +11,11 @@ const Paragraph = ({ children }: PropsWithChildren) => {
 const ParagraphStyle = styled.p`
   margin: 0;
   font-size: 1.3rem;
+
+  ${theme.breakpoints.mobile} {
+    font-size: 1.1rem;
+    font-weight: lighter;
+  }
 `;
 
 export default Paragraph;
