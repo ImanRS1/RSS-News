@@ -1,13 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { Line, Wrapper } from "./Article";
-import ContentContainer from "./ContentContainer";
+import Theme from "../themes/theme";
+
+const theme = Theme();
 
 const SkeletonArticle = () => {
   return (
     <Skeleton>
       <Wrapper>
-        <ContentContainer>
+        <Container>
           <div className="image skeleton-box"></div>
           <div className="text-content">
             <div className="title skeleton-box"></div>
@@ -16,7 +18,7 @@ const SkeletonArticle = () => {
             <div className="text skeleton-box"></div>
             <div className="text skeleton-box"></div>
           </div>
-        </ContentContainer>
+        </Container>
         <Line />
       </Wrapper>
     </Skeleton>
@@ -25,18 +27,28 @@ const SkeletonArticle = () => {
 
 export default SkeletonArticle;
 
+const Container = styled.div`
+  display: flex;
+
+  ${theme.breakpoints.mobile} {
+    flex-direction: row-reverse;
+  }
+`;
+
 const Skeleton = styled.div`
   padding-top: 30px;
   width: 100%;
   padding: 25px;
   box-sizing: border-box;
+
   .image {
     height: 10rem;
     width: 15rem;
+    margin-right: 15px;
   }
 
   .text-content {
-    width: 70%;
+    width: 100%;
   }
 
   .title {
@@ -80,6 +92,15 @@ const Skeleton = styled.div`
       100% {
         transform: translateX(150%);
       }
+    }
+  }
+
+  ${theme.breakpoints.mobile} {
+    .image {
+      height: 5rem;
+      width: 10rem;
+      margin-right: 0px;
+      margin-left: 15px;
     }
   }
 `;
