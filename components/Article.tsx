@@ -49,6 +49,10 @@ export const CategoryInfo = styled.div`
   font-weight: 300;
   font-size: 17px;
   letter-spacing: 2px;
+
+  ${theme.breakpoints.mobile} {
+    font-size: 12px;
+  }
 `;
 
 export const Wrapper = styled.a`
