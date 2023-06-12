@@ -3,6 +3,7 @@ import { rssData } from "../interfaces/rssData.interface";
 import parseContentImage from "../utils/parseContentImage";
 import ContentContainer from "./ContentContainer";
 import Theme from "../themes/theme";
+import Paragraph from "./Paragraph";
 
 const theme = Theme();
 
@@ -18,7 +19,7 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
           {parseContentImage(data.content)}
           <div className="text-content">
             <h3>{data.title}</h3>
-            {data.contentSnippet}
+            <Paragraph>{data.contentSnippet}</Paragraph>
           </div>
         </div>
         <div className="mobile-content">
@@ -26,7 +27,9 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
             <h3>{data.title}</h3>
             {parseContentImage(data.content)}
           </div>
-          <div className="text-content">{data.contentSnippet}</div>
+          <div className="text-content">
+            <Paragraph>{data.contentSnippet}</Paragraph>
+          </div>
         </div>
       </ContentContainer>
       <Line />
