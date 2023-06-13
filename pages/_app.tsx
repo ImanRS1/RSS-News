@@ -2,6 +2,7 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import Navbar from "../components/Navbar";
 import { Roboto } from "@next/font/google";
+import Footer from "../components/Footer";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -13,6 +14,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <main className={roboto.className}>
       <Navbar />
       <Component {...pageProps} />
+      <Footer />
     </main>
   );
 }
