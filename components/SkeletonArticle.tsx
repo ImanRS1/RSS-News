@@ -10,13 +10,27 @@ const SkeletonArticle = () => {
     <Skeleton>
       <Wrapper>
         <Container>
-          <div className="image skeleton-box"></div>
-          <div className="text-content">
-            <div className="title skeleton-box"></div>
-            <div className="text skeleton-box"></div>
-            <div className="text skeleton-box"></div>
-            <div className="text skeleton-box"></div>
-            <div className="text skeleton-box"></div>
+          <div className="desktop-layout">
+            <div className="image skeleton-box"></div>
+            <div className="text-content">
+              <div className="title skeleton-box"></div>
+              <div className="text skeleton-box"></div>
+              <div className="text skeleton-box"></div>
+              <div className="text skeleton-box"></div>
+              <div className="text skeleton-box"></div>
+            </div>
+          </div>
+          <div className="mobile-layout">
+            <div className="header-container">
+              <div className="title skeleton-box"></div>
+              <div className="image skeleton-box"></div>
+            </div>
+
+            <div className="text-content">
+              <div className="text skeleton-box"></div>
+              <div className="text skeleton-box"></div>
+              <div className="text skeleton-box"></div>
+            </div>
           </div>
         </Container>
         <Line />
@@ -28,10 +42,31 @@ const SkeletonArticle = () => {
 export default SkeletonArticle;
 
 const Container = styled.div`
-  display: flex;
+  .desktop-layout {
+    display: flex;
+  }
+
+  .mobile-layout {
+    display: none;
+  }
 
   ${theme.breakpoints.mobile} {
-    flex-direction: row-reverse;
+    .desktop-layout {
+      display: none;
+    }
+
+    .mobile-layout {
+      display: flex;
+      flex-direction: column;
+
+      .header-container {
+        display: flex;
+      }
+
+      .image {
+        margin-bottom: 20px;
+      }
+    }
   }
 `;
 
