@@ -5,6 +5,7 @@ import ContentContainer from "./ContentContainer";
 import Theme from "../themes/theme";
 import Paragraph from "./Paragraph";
 import Header from "./Header";
+import DateContainer from "./DateContainer";
 
 const theme = Theme();
 
@@ -21,6 +22,7 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
           <div className="text-content">
             <Header>{data.title}</Header>
             <Paragraph>{data.contentSnippet}</Paragraph>
+            <DateContainer date={data.date.toString()} />
             <p>{data.date.toString()}</p>
           </div>
         </div>
