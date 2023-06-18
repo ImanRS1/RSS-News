@@ -1,7 +1,6 @@
 ## RSS-News
 
-Using 10 different RSS feeds, this Next.js TypeScript project parses, filters and displays the news in order of publishing date. The utility functions makes sure not to publish any duplicate news articles as well as specifying the different categories based on the article.
-The test coverage mainly constists of unit testing of the utility functions using Jest, however test coverage needs to be extended.
+Using 10 different RSS feeds, this Next.js TypeScript project parses, filters, and displays the news in order of publishing date. The utility functions make sure not to publish any duplicate news articles, as well as specify the different categories based on the article. The test coverage mainly consists of unit testing the utility functions using Jest; however, test coverage needs to be extended.
 
 
 
