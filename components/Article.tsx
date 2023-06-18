@@ -23,7 +23,6 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
             <Header>{data.title}</Header>
             <Paragraph>{data.contentSnippet}</Paragraph>
             <DateContainer date={data.date.toString()} />
-            <p>{data.date.toString()}</p>
           </div>
         </div>
         <div className="mobile-content">
@@ -33,7 +32,7 @@ export const Article = ({ href, data }: { href: string; data: rssData }) => {
           </div>
           <div className="text-content">
             <Paragraph>{data.contentSnippet}</Paragraph>
-            <p>{data.date.toString()}</p>
+            <DateContainer date={data.date.toString()} />
           </div>
         </div>
       </ContentContainer>
