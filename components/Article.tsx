@@ -12,10 +12,7 @@ const theme = Theme();
 export const Article = ({ href, data }: { href: string; data: rssData }) => {
   return (
     <Wrapper href={href} target="_blank">
-      {window?.location?.pathname?.length === 1 && (
-        <CategoryInfo>{data.category}</CategoryInfo>
-      )}
-
+      <CategoryInfo>{data.category}</CategoryInfo>
       <ContentContainer>
         <div className="desktop-content">
           {parseContentImage(data.content)}
