@@ -6,6 +6,7 @@ import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
 import { urlArray } from "../utils/urlArray";
 import fetchRssData from "../utils/fetchRssData";
+import useScrollToBottom from "../utils/useScrollToBottom";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Theme from "../themes/theme";
 
@@ -15,6 +16,12 @@ export default function Home() {
   const [rssData, setRssData] = useState<[rssData]>();
   const [errorText, setErrorText] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  const handleScrollToBottom = () => {
+    console.log("scrolled to bottom");
+  };
+
+  useScrollToBottom(handleScrollToBottom);
 
   useEffect(() => {
     async function fetchData() {
