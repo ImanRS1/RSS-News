@@ -13,12 +13,27 @@ import Theme from "../themes/theme";
 const theme = Theme();
 
 export default function Home() {
-  const [rssData, setRssData] = useState<[rssData]>();
+  const [rssData, setRssData] = useState<rssData[]>();
   const [errorText, setErrorText] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
+  const [rssSection, setRssSection] = useState<number>(0);
 
-  const handleScrollToBottom = () => {
-    console.log("scrolled to bottom");
+  const handleScrollToBottom = async () => {
+    try {
+      setLoading(true);
+      const nextRssData = await fetchRssData(urlArray, rssSection + 10, true);
+      setRssData((prevRssData) => {
+        if (prevRssData) {
+          return [...prevRssData, ...nextRssData?.data];
+        } else {
+          return [];
+        }
+      });
+      setLoading(false);
+      setRssSection((prevRssSection) => prevRssSection + 10);
+    } catch (error: unknown) {
+      setErrorText("Något gick fel, försök igen senare.");
+    }
   };
 
   useScrollToBottom(handleScrollToBottom);
@@ -26,9 +41,9 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const rssData = await fetchRssData(urlArray, true);
+        const initialRssData = await fetchRssData(urlArray, rssSection, true);
         setLoading(false);
-        setRssData(rssData?.data);
+        setRssData(initialRssData?.data);
       } catch (error: unknown) {
         setLoading(false);
         setErrorText("Något gick fel, försök igen senare.");
@@ -43,8 +58,8 @@ export default function Home() {
         <ArticleContainer>
           {loading && <SkeletonLoader />}
           {rssData &&
-            rssData.map((data) => (
-              <Article key={data.id} href={data.link} data={data} />
+            rssData.map((data, i) => (
+              <Article key={i} href={data.link} data={data} />
             ))}
           {errorText && ErrorText(errorText)}
         </ArticleContainer>

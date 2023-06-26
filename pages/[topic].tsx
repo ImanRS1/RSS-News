@@ -23,7 +23,7 @@ const topic = () => {
         const currentUrl = urlArray.filter(
           (url) => url.split("/").at(-1) === `${topic}`.toLowerCase()
         );
-        const rssData = await fetchRssData(currentUrl);
+        const rssData = await fetchRssData(currentUrl, 0);
         setLoading(false);
         setRssData(rssData?.data);
       } catch (error: unknown) {

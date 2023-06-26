@@ -8,7 +8,7 @@ export default async function handler(
   res: NextApiResponse<object>
 ) {
   try {
-    const { urlArray, totalFetch } = req.body;
+    const { urlArray, section, totalFetch } = req.body;
 
     const feeds = await Promise.all(
       urlArray.map((url: string, totalFetch?: boolean) =>
@@ -27,7 +27,9 @@ export default async function handler(
       ({ id }, index) => !ids.includes(id, index + 1)
     );
 
-    return res.status(200).send(sortOnNewsDates(uniqueArticles));
+    return res
+      .status(200)
+      .send(sortOnNewsDates(uniqueArticles).slice(section, section + 10));
   } catch (error: any) {
     console.error("Could not fetch and parse data: ", error.message);
     return res

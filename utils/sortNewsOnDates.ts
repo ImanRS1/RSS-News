@@ -10,7 +10,7 @@ export default function sortNewsOnDates(
       new Date(b.date).valueOf() - new Date(a.date).valueOf()
   );
 
-  if (totalFetch) return reduceAmountOfSportNews(dateSortedArray).slice(0, 20);
+  if (totalFetch) return reduceAmountOfSportNews(dateSortedArray);
 
-  return dateSortedArray.slice(0, 20);
+  return dateSortedArray;
 }
