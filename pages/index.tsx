@@ -14,23 +14,19 @@ const theme = Theme();
 
 export default function Home() {
   const [rssData, setRssData] = useState<rssData[]>();
+  const [completeRssData, setCompleteRssData] = useState<rssData[]>();
   const [errorText, setErrorText] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [rssSection, setRssSection] = useState<number>(0);
 
   const handleScrollToBottom = async () => {
     try {
-      setLoading(true);
-      const nextRssData = await fetchRssData(urlArray, rssSection + 10, true);
-      setRssData((prevRssData) => {
-        if (prevRssData) {
-          return [...prevRssData, ...nextRssData?.data];
-        } else {
-          return [];
-        }
-      });
-      setLoading(false);
-      setRssSection((prevRssSection) => prevRssSection + 10);
+      if (rssData?.length) {
+        const nextSection = completeRssData?.slice(
+          rssData.length,
+          rssData.length + 10
+        );
+        setRssData(rssData.concat(nextSection ?? []));
+      }
     } catch (error: unknown) {
       setErrorText("Något gick fel, försök igen senare.");
     }
@@ -41,9 +37,10 @@ export default function Home() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const initialRssData = await fetchRssData(urlArray, rssSection, true);
+        const initialRssData = await fetchRssData(urlArray, true);
+        setCompleteRssData(initialRssData?.data);
         setLoading(false);
-        setRssData(initialRssData?.data);
+        setRssData(initialRssData?.data.slice(0, 10));
       } catch (error: unknown) {
         setLoading(false);
         setErrorText("Något gick fel, försök igen senare.");

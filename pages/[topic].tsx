@@ -18,12 +18,12 @@ const topic = () => {
   useEffect(() => {
     async function fetchData() {
       if (!topic) return;
-
+      setLoading(true);
       try {
         const currentUrl = urlArray.filter(
           (url) => url.split("/").at(-1) === `${topic}`.toLowerCase()
         );
-        const rssData = await fetchRssData(currentUrl, 0);
+        const rssData = await fetchRssData(currentUrl);
         setLoading(false);
         setRssData(rssData?.data);
       } catch (error: unknown) {
