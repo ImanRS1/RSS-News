@@ -6,22 +6,41 @@ import ErrorText from "../components/ErrorText";
 import { Article } from "../components/Article";
 import { urlArray } from "../utils/urlArray";
 import fetchRssData from "../utils/fetchRssData";
+import useScrollToBottom from "../utils/useScrollToBottom";
 import SkeletonLoader from "../components/SkeletonLoader";
 import Theme from "../themes/theme";
 
 const theme = Theme();
 
 export default function Home() {
-  const [rssData, setRssData] = useState<[rssData]>();
+  const [rssData, setRssData] = useState<rssData[]>();
+  const [completeRssData, setCompleteRssData] = useState<rssData[]>();
   const [errorText, setErrorText] = useState<string>();
   const [loading, setLoading] = useState<boolean>(true);
+
+  const handleScrollToBottom = async () => {
+    try {
+      if (rssData?.length) {
+        const nextSection = completeRssData?.slice(
+          rssData.length,
+          rssData.length + 10
+        );
+        setRssData(rssData.concat(nextSection ?? []));
+      }
+    } catch (error: unknown) {
+      setErrorText("Något gick fel, försök igen senare.");
+    }
+  };
+
+  useScrollToBottom(handleScrollToBottom);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const rssData = await fetchRssData(urlArray, true);
+        const initialRssData = await fetchRssData(urlArray, true);
+        setCompleteRssData(initialRssData?.data);
         setLoading(false);
-        setRssData(rssData?.data);
+        setRssData(initialRssData?.data.slice(0, 10));
       } catch (error: unknown) {
         setLoading(false);
         setErrorText("Något gick fel, försök igen senare.");
@@ -36,8 +55,8 @@ export default function Home() {
         <ArticleContainer>
           {loading && <SkeletonLoader />}
           {rssData &&
-            rssData.map((data) => (
-              <Article key={data.id} href={data.link} data={data} />
+            rssData.map((data, i) => (
+              <Article key={i} href={data.link} data={data} />
             ))}
           {errorText && ErrorText(errorText)}
         </ArticleContainer>
