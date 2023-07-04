@@ -1,21 +1,42 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
-const useScrollToBottom = (callback: () => void) => {
+const useScrollToBottom = (
+  callback: () => void
+): React.MutableRefObject<Element | null> => {
+  const containerRef = useRef<Element | null>(null);
+
   useEffect(() => {
-    const handleScroll = () => {
-      const { scrollTop, scrollHeight, clientHeight } =
-        document.documentElement;
-      if (scrollTop + clientHeight >= scrollHeight) {
+    const options: IntersectionObserverInit = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 1.0,
+    };
+
+    const handleIntersect: IntersectionObserverCallback = (entries) => {
+      if (entries[0].isIntersecting) {
         callback();
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const containerElement = containerRef.current;
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    if (containerElement) {
+      const observer = new IntersectionObserver(handleIntersect, options);
+      const lastChild = containerElement.lastElementChild;
+
+      if (lastChild) {
+        observer.observe(lastChild);
+      }
+
+      return () => {
+        if (lastChild) {
+          observer.unobserve(lastChild);
+        }
+      };
+    }
   }, [callback]);
+
+  return containerRef;
 };
 
 export default useScrollToBottom;

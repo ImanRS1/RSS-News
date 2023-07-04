@@ -31,7 +31,7 @@ const topic = () => {
     }
   };
 
-  useScrollToBottom(handleScrollToBottom);
+  const observerRef = useScrollToBottom(handleScrollToBottom);
 
   useEffect(() => {
     async function fetchData() {
@@ -54,7 +54,7 @@ const topic = () => {
 
   return (
     <MainWrapper>
-      <ArticleContainer>
+      <ArticleContainer ref={observerRef as React.RefObject<HTMLDivElement>}>
         {loading && <SkeletonLoader />}
         {rssData &&
           rssData.map((data) => (

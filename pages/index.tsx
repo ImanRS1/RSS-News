@@ -32,7 +32,7 @@ export default function Home() {
     }
   };
 
-  useScrollToBottom(handleScrollToBottom);
+  const observerRef = useScrollToBottom(handleScrollToBottom);
 
   useEffect(() => {
     async function fetchData() {
@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <>
       <MainWrapper>
-        <ArticleContainer>
+        <ArticleContainer ref={observerRef as React.RefObject<HTMLDivElement>}>
           {loading && <SkeletonLoader />}
           {rssData &&
             rssData.map((data, i) => (
